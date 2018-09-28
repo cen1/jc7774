@@ -21,6 +21,7 @@ export class KeycloakService {
    */
   static init(): Promise<any> {
 
+    console.log("KC service init");
     const keycloakAuth: any = new Keycloak(
       {
         'realm': environment.keycloak.realm,
@@ -49,6 +50,7 @@ export class KeycloakService {
    * Method for performing login.
    */
   login(): void {
+    console.log("KC service login");
     KeycloakService.auth.authz.login({redirectUri: window.location.href})
       .success(() => KeycloakService.auth.loggedIn = true);
   }
@@ -57,6 +59,7 @@ export class KeycloakService {
    * Method for performing logout.
    */
   logout() {
+    console.log("KC service logout");
     KeycloakService.auth.authz.logout({redirectUri: window.location.origin + this.baseHref});
     KeycloakService.auth.loggedIn = false;
     KeycloakService.auth.authz = null;
@@ -68,6 +71,7 @@ export class KeycloakService {
    * @returns {Promise<string>}
    */
   getToken(): Promise<string> {
+    console.log("KC service get token");
     return new Promise<string>((resolve, reject) => {
       if (KeycloakService.auth.authz.token) {
         KeycloakService.auth.authz.updateToken(5)
@@ -88,6 +92,7 @@ export class KeycloakService {
    * @returns {Promise<any>}
    */
   getTokenParsed(): Promise<any> {
+    console.log("KC service get token parsed");
     return new Promise<any>((resolve, reject) => {
       if (KeycloakService.auth.authz.token) {
         KeycloakService.auth.authz.updateToken(5)
@@ -108,6 +113,7 @@ export class KeycloakService {
    * @returns {boolean}
    */
   isLoggedIn(): boolean {
+    console.log("KC service is logged in");
     return KeycloakService.auth != null && KeycloakService.auth.loggedIn;
   }
 
@@ -117,6 +123,7 @@ export class KeycloakService {
    * @returns {Promise<any>}
    */
   getUserRoles(): Promise<any> {
+    console.log("KC service get user roles");
     return new Promise<any>((resolve, reject) => {
       this.getTokenParsed().then(
         r => resolve(r.realm_access.roles)
@@ -130,6 +137,7 @@ export class KeycloakService {
    * @returns {Promise<RequestOptionsArgs>}
    */
   getHeaders(): Promise<any> {
+    console.log("KC service get headers");
     return new Promise<any>((resolve, reject) => {
       this.getToken().then(
         r => {

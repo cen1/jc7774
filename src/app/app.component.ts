@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { KeycloakService } from './services/keycloak/keycloak.service';
-import {LocationStrategy} from '@angular/common';
-import {NavigationEnd, Router} from '@angular/router';
+import { LocationStrategy } from '@angular/common';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
